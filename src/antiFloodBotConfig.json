@@ -1,4 +1,4 @@
 { "kickMessage" : "%nick% is kicked due to flood",
-    "timeIntervalScope" : 8, // interval when entries are collected [sec]
-    "entryThreshold" : 5, //how many entries are allowed in timeIntervalScope
+    "timeIntervalScope" : 8,
+    "entryThreshold" : 5, 
     "logFile" : "/tmp/antifloodbot.log"}
