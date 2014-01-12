@@ -14,10 +14,11 @@ def readConfig():
 
 inputs =  {} #store time (unixtimestamp in sec) of every entry sent by user in map where key is user nickname
 kicked = []  #store nicknames of kicked users
-timeIntervalScope = 8 # interval when entries are collected [sec]
-entryThreshold = 5 #how many entries are allowed in timeIntervalScope
 conf = readConfig()
-logFile = conf.logFile
+
+timeIntervalScope = conf['timeIntervalScope'] # interval when entries are collected [sec]
+entryThreshold = conf['entryThreshold'] #how many entries are allowed in timeIntervalScope
+logFile = conf['logFile']
 
 @hook.event('PRIVMSG')
 def antiFlood(inp, nick=None, msg=None, conn=None, chan=None):
@@ -39,7 +40,7 @@ def antiFlood(inp, nick=None, msg=None, conn=None, chan=None):
             conn.send(out)
             file.write('%s is kicked with ban \n' % (nick))
         out = "KICK %s %s" % (chan, nick)
-        conn.send(conf.kickMessage)
+        conn.send(conf['kickMessage'])
         conn.send(out)
         kicked.append(nick)
         file.close()
