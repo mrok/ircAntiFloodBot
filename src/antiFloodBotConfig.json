@@ -1,0 +1,2 @@
+{ "kickMessage" : "%nick% is kicked due to flood",
+    "logFile" : "/tmp/antifloodbot.log"}
