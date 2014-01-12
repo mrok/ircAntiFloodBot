@@ -33,14 +33,16 @@ def antiFlood(inp, nick=None, msg=None, conn=None, chan=None):
     inputs[nick] = filter(lambda x: x > timeThreshold, inputs[nick]) #filter out every entry older than 8 sec (threshold)
 
     if (len(inputs[nick]) >= entryThreshold): #if user has good day, kick one
+        explanationMessage = conf['kickMessage']
         file = open(logFile, 'a')
         file.write('Trying to kick %s on channel %s \n' % (nick, chan))
         if (nick in kicked):
+            explanationMessage =  conf['banMessage']
             out = "MODE %s +b %s" % (chan, nick)
             conn.send(out)
             file.write('%s is kicked with ban \n' % (nick))
-        out = "KICK %s %s" % (chan, nick)
-        conn.send(conf['kickMessage'])
+        out = "KICK %s %s: %s" % (chan, nick, explanationMessage)
+
         conn.send(out)
         kicked.append(nick)
         file.close()

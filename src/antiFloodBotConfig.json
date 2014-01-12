@@ -1,4 +1,5 @@
-{ "kickMessage" : "%nick% is kicked due to flood",
+{ "kickMessage" : "kicked due to flood",
+    "banMessage": "You get ban",
     "timeIntervalScope" : 8,
-    "entryThreshold" : 5, 
+    "entryThreshold" : 5,
     "logFile" : "/tmp/antifloodbot.log"}
