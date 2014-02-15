@@ -37,4 +37,6 @@ nosetests.xml
 
 
 /venv
-/src/.idea
+/.idea/*
+src/.idea/*
+/src/test.py
