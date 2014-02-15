@@ -1,4 +1,4 @@
-{ "kickMessage" : "kicked due to flood",
+{ "kickMessage" : "You are kicked out",
     "banMessage": "You get ban",
     "timeIntervalScope" : 8,
     "entryThreshold" : 5,
