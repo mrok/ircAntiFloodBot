@@ -41,7 +41,7 @@ def antiFlood(inp, nick=None, msg=None, conn=None, chan=None):
             out = "MODE %s +b %s" % (chan, nick)
             conn.send(out)
             file.write('%s is kicked with ban \n' % (nick))
-        out = "KICK %s %s: %s" % (chan, nick, explanationMessage)
+        out = "KICK %s %s : %s" % (chan, nick, explanationMessage)
 
         conn.send(out)
         kicked.append(nick)
@@ -58,3 +58,8 @@ def onnick(param, conn=None, raw=None):
     file = open(logFile, 'a')
     file.write(json.dumps(param))
     file.close()
+
+
+@hook.event("004")
+def onConnect(param, conn=None, raw=None):
+    conn.send("Antiflod bot is ready")
