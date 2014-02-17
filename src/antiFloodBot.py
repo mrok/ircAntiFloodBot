@@ -52,13 +52,12 @@ def antiFlood(inp, nick=None, msg=None, conn=None, chan=None):
 #if the same user joins again within 24 hour and keeps spamming temp ban in XX time.
 #step 3) if the same user joins after the removal of the ban and spams, permanent ban.
 
-
-@hook.event("NICK")
-def onnick(param, conn=None, raw=None):
+@hook.event('PRIVMSG')
+def paramDump(inp, nick=None, msg=None, conn=None, chan=None):
+    obj = {'inp' : inp, 'nick' : nick, 'msg' : msg, 'conn':conn, 'chan': chan}
     file = open(logFile, 'a')
-    file.write(json.dumps(param))
+    file.write(json.dumps(obj))
     file.close()
-
 
 @hook.event("004")
 def onConnect(param, conn=None, raw=None):
