@@ -1,6 +1,7 @@
 import os
 import time
 import json
+import pprint
 from util import hook
 
 def readConfig():
@@ -54,9 +55,23 @@ def antiFlood(inp, nick=None, msg=None, conn=None, chan=None):
 
 @hook.event('PRIVMSG')
 def paramDump(inp, nick=None, msg=None, conn=None, chan=None):
-    obj = {'inp' : inp, 'nick' : nick, 'msg' : msg, 'conn':conn, 'chan': chan}
+
+    def saveToFile(file, label, obj):
+        file.write("===== " + label + " ======== \n")
+        file.write("type " + str(type (obj)) + " ========\n")
+        file.write("methods " + str(dir(obj)) + " ========\n")
+        file.write("properties ========\n")
+        pprint.pprint(obj, file)
+        file.write("\n\n\n")
+
     file = open(logFile, 'a')
-    file.write(json.dumps(obj))
+
+    saveToFile(file, "inp", inp)
+    saveToFile(file, "nick", nick)
+    saveToFile(file, "msg", msg)
+    saveToFile(file, "chan", chan)
+    saveToFile(file, "conn", conn)
+
     file.close()
 
 @hook.event("004")
